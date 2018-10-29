@@ -1,0 +1,6 @@
+com\netcracker\edu\backend\controller\CompanySubscriptionController.class
+com\netcracker\edu\backend\entity\CompanySubscription.class
+com\netcracker\edu\backend\service\CompanySubscriptionService.class
+com\netcracker\edu\backend\repository\CompanySubscriptionRepository.class
+com\netcracker\edu\backend\service\impl\CompanySubscriptionServiceImpl.class
+com\netcracker\edu\backend\BackendApplication.class

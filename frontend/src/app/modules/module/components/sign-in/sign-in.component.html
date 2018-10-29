@@ -1,0 +1,82 @@
+<div class="container" style="margin-bottom: 30px">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-1">
+
+      <h1 class="page-header">Please Sign In</h1>
+
+      <div class="form-group">
+        <label for="username">Your username:</label>
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input type="text" id="username" class="form-control" [(ngModel)]="user.username"
+               placeholder="Enter username" required autofocus>
+        </div>
+        <label for="email">Login: </label>
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input type="email" id="email" class="form-control" [(ngModel)]="user.userLogin"
+                 placeholder="Enter E-mail" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Your password:</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="password" (input)="confirmPasswords()"
+               placeholder="Enter password" required>
+
+        <label for="password-confirm">Confirm password:</label>
+        <input type="password" id="password-confirm" class="form-control" [(ngModel)]="confirmPassword" (input)="confirmPasswords()"
+               placeholder="Repeat password" required>
+
+        <alert type="success" *ngIf="confirm === true">
+          <strong>Well done!</strong> Passwords matched
+        </alert>
+        <alert type="warning" *ngIf="confirm === false">
+          <strong>Warning!</strong> Passwords not matched
+        </alert>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label for="first-name">Your first name:</label>
+        <input type="text" id="first-name" class="form-control" [(ngModel)]="client.clientFirstName"
+               placeholder="Enter first name" required>
+
+        <label for="last-name">Your last name:</label>
+        <input type="text" id="last-name" class="form-control" [(ngModel)]="client.clientLastName"
+               placeholder="Enter last name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Your birthday: </label>
+        <div class="input-group">
+          <input type="text"
+                 placeholder="Enter birthday"
+                 class="form-control"
+                 bsDatepicker
+                 placement="right"
+                 [maxDate]="calendarMaxDate"
+                 (bsValueChange)="dateChange($event)">
+          <span class="input-group-addon">
+            <span class="glyphicon-calendar glyphicon"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="rememberMe"> Remember me
+        </label>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-link col-xs-5" type="button"
+                (click)="_logIn()">Log in</button>
+        <button class="btn btn-primary col-xs-5 col-xs-offset-2" type="button"
+                (click)="_signIn()">Sign in</button>
+      </div>
+
+    </div><!--col-->
+  </div><!--row-->
+</div><!--container-->

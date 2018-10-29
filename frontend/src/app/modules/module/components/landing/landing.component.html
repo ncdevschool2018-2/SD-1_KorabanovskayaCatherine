@@ -1,0 +1,62 @@
+<div class="container marketing">
+
+  <div class="row">
+    <div class="well">
+      <h2>My subscriptions</h2>
+      <p>Contains information about my subscriptions</p>
+      <p>Subs count: {{companySubscriptions ? companySubscriptions.length : 0}}</p>
+
+      <div class="form-inline">
+        <button type="button" class="btn btn-default" (click)="_openModal(template)">Create new Sub</button>
+        <button type="button" class="btn btn-default" (click)="_updateCompanySubscriptions()">Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3" *ngFor="let sub of companySubscriptions">
+      <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+      <h2><a class="btn-link" [href]="sub.subUrl"><span class="text-capitalize">{{sub.subName}}</span></a></h2>
+      <h3>{{sub.subPrice}} $ in a day</h3>
+      <p>{{sub.subInformation}}</p>
+      <p><button class="btn btn-default" (click)="_openModal(template, sub)">View details &raquo;</button></p>
+    </div>
+  </div><!-- /.row -->
+</div>
+
+<!-- Modal -->
+<ng-template #template>
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="_closeModal()">&times;</button>
+        <h4 class="modal-title">{{editMode ? "Editing" : "Creating"}} sub</h4>
+      </div><!-- modal header -->
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Sub Name:</label>
+          <input class="form-control" name="name" [(ngModel)]="editableSub.subName" #name="ngModel" required
+                 placeholder="Enter sub name">
+          <label>Sub Url:</label>
+          <input class="form-control" name="url" [(ngModel)]="editableSub.subUrl" #url="ngModel" required
+                 placeholder="Enter url">
+          <label>Sub Price:</label>
+          <input class="form-control" name="price" type="number" [(ngModel)]="editableSub.subPrice" #price="ngModel" required
+                 placeholder="Enter sub price">
+          <label>Sub information:</label>
+          <input class="form-control" name="information" [(ngModel)]="editableSub.subInformation" #information="ngModel" required
+                 placeholder="Enter sub information">
+        </div>
+      </div><!-- modal body -->
+
+      <div class="modal-footer">
+
+        <button *ngIf="editMode" type="button" class="btn btn-default pull-left"
+                (click)="_deleteCompanySubscription(editableSub.subId.toString(10))">Delete</button>
+
+        <button type="button" class="btn btn-default" (click)="_addCompanySubscription()">
+          {{editMode ? "Save" : "Create"}}</button>
+        <button type="button" class="btn btn-default" (click)="_closeModal()">Close</button>
+      </div>
+
+</ng-template>

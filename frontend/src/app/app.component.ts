@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Link} from "./modules/module/components/navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'MySub-s';
+
+  public linksForAdmin: Link[] = [
+    {
+      name:'Users',
+      link:'table-users'
+    },
+    {
+      name:'Subs',
+      link:'table-subs'
+    }
+  ];
 }

@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <div class="well">
+        <div>
+          <p>Sub-s count: {{companySubscriptions ? companySubscriptions.length : 0}}</p>
+          <button type="button" class="btn btn-default" (click)="_updateSubscription()">Update</button>
+        </div>
+
+      </div>
+
+      <h4>Sub-s:</h4>
+
+      <table class="table table-hover">
+        <thead class="">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Company Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Information</th>
+          <th scope="col">Url</th>
+          <th score="col">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sub of companySubscriptions">
+          <td scope="row">{{sub.subId}}</td>
+          <td scope="row">{{sub.companyId}}</td>
+          <td scope="row">{{sub.subName}}</td>
+          <td scope="row">{{sub.subPrice}}</td>
+          <td scope="row">{{sub.subInformation}}</td>
+          <td scope="row">{{sub.subUrl}}</td>
+          <td scope="row"><button type="button" class="btn btn-default" (click)="_deleteSubscription(sub.subId)">
+            Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

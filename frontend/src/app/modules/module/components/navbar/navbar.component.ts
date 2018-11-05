@@ -7,7 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() public links: Link[] = [];
+  @Input()
+  public links: Link[] = [];
+  public isCollapsed: boolean = true;
+
   constructor() { }
 
   ngOnInit() {

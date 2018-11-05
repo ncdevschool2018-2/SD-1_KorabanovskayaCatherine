@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Link} from "./modules/module/components/navbar/navbar.component";
 
 @Component({
@@ -6,17 +6,18 @@ import {Link} from "./modules/module/components/navbar/navbar.component";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'MySub-s';
 
-  public linksForAdmin: Link[] = [
-    {
-      name:'Users',
-      link:'table-users'
-    },
-    {
-      name:'Subs',
-      link:'table-subs'
-    }
-  ];
+  public links: Link[] = [];
+
+  ngOnInit() {
+    this.links.push(
+      {name: 'Store', link: 'store'},
+      {name: 'Tables', link: 'tables'},
+      {name: 'Subs', link: 'subs'},
+      {name: 'Orders', link: 'orders'},
+      {name: 'Settings', link: 'settings'}
+    );
+  }
 }

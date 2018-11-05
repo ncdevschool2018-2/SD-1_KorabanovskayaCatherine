@@ -16,10 +16,10 @@ export class UsersService {
   }
 
   deleteUser(userId: string): Observable<void> {
-    return this.http.delete<void>('' + userId); // subUrl
+    return this.http.delete<void>('api/users/' + userId); // subUrl
   }
 
   saveUser(user: User): Observable<User> {
-    return this.http.post<User>('', user);
+    return this.http.post<User>('api/users', user);
   }
 }

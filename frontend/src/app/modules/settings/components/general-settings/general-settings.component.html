@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row well">
+    <h2 class="header">My Account</h2>
+
+    <div class="form-group">
+      <label for="login">Login:</label>
+      <p id="login">{{user.userLogin}}</p>
+    </div>
+  </div>
+
+  <div class="row well" *ngIf="currentRole==='COMPANY'">
+    <img class="img-circle center-pill" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="company image" width="120" height="120">
+  </div>
+
+  <div class="row well">
+    <div *ngIf="currentRole==='COMPANY'">
+      <div class="form-group">
+        <label for="company-name">Company name:</label>
+        <div class="form-inline">
+          <input type="text" id="company-name" class="form-control" [(ngModel)]="company.companyName"
+                 placeholder="Enter company name" required>
+          <button type="button" class="btn btn-default">Save</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="company-domain-name">Company Domain Name: </label>
+        <p id="company-domain-name">{{company.companyDomainName}}</p>
+      </div>
+      <div class="form-group">
+        <label for="max-sub">Company max available sub-s: </label>
+        <p id="max-sub">{{company.maxAmountAvailableSubs}}</p>
+      </div>
+    </div>
+
+    <div *ngIf="currentRole === 'CLIENT'">
+      <div class="form-group">
+        <label for="client-last-name">Last name:</label>
+        <p id="client-last-name">{{client.clientLastName}}</p>
+        <label for="client-first-name">First name:</label>
+        <p id="client-first-name">{{client.clientFirstName}}</p>
+        <label for="client-birthday">Birthday:</label>
+        <p id="client-birthday">{{client.clientDateBirthday}}</p>
+      </div>
+    </div>
+  </div><!--row-->
+</div><!--container-->

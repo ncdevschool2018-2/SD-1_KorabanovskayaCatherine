@@ -1,0 +1,156 @@
+<div class="container-fluid">
+
+  <h4 class="header">User Accounts:</h4>
+
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="row well">
+        <p>Accounts: {{users ? users.length : 0}}</p>
+        <button class="btn btn-default btn-block" (click)="_openModal(template)">Create new user account</button>
+        <button class="btn btn-default btn-block" (click)="_updateUsers()">Refresh</button>
+      </div>
+
+      <div class="row">
+        <accordion>
+          <accordion-group heading="Information">
+            <div *ngIf="currentRole==='COMPANY'">
+              <p>Company name: {{currentCompany.companyName}}</p>
+              <p>Company domain name: {{currentCompany.companyDomainName}}</p>
+              <div class="form-group">
+                <label>Max available subs:</label>
+                <div class="form-inline">
+                  <input type="number" class="form-control" [(ngModel)]="maxAvailableSub">
+                  <button class="btn btn-default" (click)="_changeMaxAvailableSub()">Change</button>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="currentRole==='CLIENT'">
+              <p>Last Name: {{currentClient.clientLastName}}</p>
+              <p>First Name: {{currentClient.clientFirstName}}</p>
+              <p>Birthday: {{currentClient.clientDateBirthday}}</p>
+            </div>
+          </accordion-group>
+        </accordion>
+      </div><!--row-->
+    </div><!--col-md-3-->
+
+    <div class="col-md-9">
+      <table class="table table-hover">
+        <thead class="">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Username</th>
+          <th scope="col">Registration Date</th>
+          <th scope="col">Role</th>
+          <th scope="col">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users" (click)="_chooseUser(user)" [class.active]="user===currentUser">
+          <td scope="row">{{user.userId}}</td>
+          <td scope="row">{{user.username}}</td>
+          <td scope="row">{{user.registrationDate}}</td>
+          <td scope="row">{{user.roleId}}</td>
+          <td><button type="button" class="btn btn-default" (click)="_deleteUser(user.userId)">Delete</button></td>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <pagination [boundaryLinks]="true" [totalItems]="50"
+                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+          </pagination>
+        </div>
+      </div>
+
+    </div><!--col-md-9-->
+  </div><!--row-->
+</div><!--container-->
+
+<!-- Modal -->
+<ng-template #template>
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" (click)="_closeModal()">&times;</button>
+    <p>Create new {{chooseRole}} Account</p>
+  </div><!-- modal header -->
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Username:</label>
+      <input class="form-control" name="username" [(ngModel)]="currentUser.username" #username="ngModel" required
+             placeholder="Enter username">
+      <label>Login:</label>
+      <input class="form-control" name="email" [(ngModel)]="currentUser.userLogin" #email="ngModel" required
+             placeholder="Enter E-mail">
+      <label>Password:</label>
+      <input class="form-control" name="password" type="password" [(ngModel)]="currentUser.userPassword"
+             #password="ngModel" required placeholder="Enter password">
+    </div>
+
+    <div class="form-group">
+      <label for="roles">Roles:</label>
+      <div class="btn-group" id="roles" btnRadioGroup [(ngModel)]="chooseRole">
+        <label class="btn btn-default" [btnRadio]="role"
+               tabindex="0" role="button" *ngFor="let role of ROLES">{{role}}</label>
+      </div>
+    </div>
+
+    <hr>
+
+    <!--user data-->
+    <div *ngIf="chooseRole && chooseRole.toLocaleLowerCase()==='client'">
+      <div class="form-group">
+        <label for="first-name">Your first name:</label>
+        <input type="text" id="first-name" class="form-control" [(ngModel)]="currentClient.clientFirstName"
+               placeholder="Enter first name" required>
+
+        <label for="last-name">Your last name:</label>
+        <input type="text" id="last-name" class="form-control" [(ngModel)]="currentClient.clientLastName"
+               placeholder="Enter last name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Your birthday: </label>
+        <div class="input-group">
+          <input type="text"
+                 placeholder="Enter birthday"
+                 class="form-control"
+                 bsDatepicker
+                 placement="right"
+                 [(ngModel)]="currentClient.clientDateBirthday">
+          <span class="input-group-addon">
+            <span class="glyphicon-calendar glyphicon"></span>
+          </span>
+        </div>
+      </div>
+    </div><!--user data-->
+
+    <!--company data-->
+    <div *ngIf="chooseRole && chooseRole.toLocaleLowerCase()==='company'">
+      <div class="form-group">
+        <label for="company-name">Company name:</label>
+        <input type="text" id="company-name" class="form-control" [(ngModel)]="currentCompany.companyName"
+               placeholder="Enter company name" required>
+        <label for="company-domain-name">Company domain name (your ID in our system):</label>
+        <input type="text" id="company-domain-name" class="form-control" [(ngModel)]="currentCompany.companyDomainName"
+               placeholder="Enter company domain name" required>
+        <label for="max-sub">Max available sub-s:</label>
+        <input type="number" id="max-sub" class="form-control" [(ngModel)]="currentCompany.maxAmountAvailableSubs"
+               placeholder="Enter max sub-s">
+      </div>
+    </div>
+
+  </div><!-- modal body -->
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="_saveUser()">Create</button>
+    <button type="button" class="btn btn-default" (click)="_closeModal()">Close</button>
+  </div>
+
+</ng-template>
+
+
+

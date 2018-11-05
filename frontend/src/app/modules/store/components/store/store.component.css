@@ -1,0 +1,17 @@
+
+.carousel.slide.img-circle {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.container.row {
+  margin-top: 20px;
+}
+
+.cslide {
+  height: 500px;
+}

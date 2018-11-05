@@ -1,0 +1,23 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="btn-group">
+        <label class="btn btn-default btn-block" [(ngModel)]="settingsRadioButton" *ngFor="let setting of settings; let index"
+               [btnRadio]="setting" tabindex="index" role="button">{{setting}}</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div *ngIf="settingsRadioButton===settings[0]">
+        <app-general-settings></app-general-settings>
+      </div>
+      <div *ngIf="settingsRadioButton===settings[1]">
+        <app-billing-account-settings></app-billing-account-settings>
+      </div>
+    </div><!--col-md-6-->
+  </div><!--row-->
+</div><!--container-->
+
+

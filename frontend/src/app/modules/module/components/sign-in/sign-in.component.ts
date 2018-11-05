@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../model/user";
 import {Client} from "../../../../model/client";
+import {DateUtil} from "../../../../model/utils/DateUtil";
 
 @Component({
   selector: 'app-sign-in',
@@ -62,13 +63,7 @@ export class SignInComponent implements OnInit, OnDestroy {
     if (value.toString() === "Invalid Date") {
       this.client.clientDateBirthday = undefined;
     } else {
-      this.client.clientDateBirthday = SignInComponent.convertTime(value);
+      this.client.clientDateBirthday = DateUtil.convertTime(value);
     }
-  }
-
-  private static convertTime(date: Date): string {
-    let datetime: string = date.toLocaleString();
-    let index: number = datetime.indexOf(',');
-    return datetime.substring(0, index);
   }
 }

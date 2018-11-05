@@ -11,14 +11,14 @@ export class CompanySubscriptionService {
   constructor(private http: HttpClient) {}
 
   getCompanySubscriptions(): Observable<CompanySubscription[]> {
-    return this.http.get<CompanySubscription[]>('/api/sub'); //  subUrl
+    return this.http.get<CompanySubscription[]>('/api/subscriptions'); //  subUrl
   }
 
   saveCompanySubscription(subscription: CompanySubscription): Observable<CompanySubscription> {
-    return this.http.post<CompanySubscription>('/api/sub', subscription); // subUrl
+    return this.http.post<CompanySubscription>('/api/subscriptions', subscription); // subUrl
   }
 
   deleteCompanySubscription(subscriptionId: string): Observable<void> {
-    return this.http.delete<void>('/api/sub/' + subscriptionId); // subUrl
+    return this.http.delete<void>('/api/subscriptions/' + subscriptionId); // subUrl
   }
 }

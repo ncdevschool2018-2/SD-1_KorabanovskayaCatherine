@@ -6,16 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Subscriptions {
+public class Subscription {
     private long subId;
+    private long ownerId;
     private String subName;
     private String subUrl;
     private String subInformation;
     private double subPrice;
-    private Integer subMinAmountDays;
+    private int subMinAmountDays;
+    private Integer categoryId;
 
     @Id
-    @Column(name = "sub_id")
+    @Column(name = "sub_id", nullable = false)
     public long getSubId() {
         return subId;
     }
@@ -25,7 +27,17 @@ public class Subscriptions {
     }
 
     @Basic
-    @Column(name = "sub_name")
+    @Column(name = "owner_id", nullable = false)
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    @Basic
+    @Column(name = "sub_name", nullable = false, length = 45)
     public String getSubName() {
         return subName;
     }
@@ -35,7 +47,7 @@ public class Subscriptions {
     }
 
     @Basic
-    @Column(name = "sub_url")
+    @Column(name = "sub_url", nullable = true, length = 60)
     public String getSubUrl() {
         return subUrl;
     }
@@ -45,7 +57,7 @@ public class Subscriptions {
     }
 
     @Basic
-    @Column(name = "sub_information")
+    @Column(name = "sub_information", nullable = true, length = 100)
     public String getSubInformation() {
         return subInformation;
     }
@@ -55,7 +67,7 @@ public class Subscriptions {
     }
 
     @Basic
-    @Column(name = "sub_price")
+    @Column(name = "sub_price", nullable = false, precision = 0)
     public double getSubPrice() {
         return subPrice;
     }
@@ -65,45 +77,22 @@ public class Subscriptions {
     }
 
     @Basic
-    @Column(name = "sub_min_amount_days")
-    public Integer getSubMinAmountDays() {
+    @Column(name = "sub_min_amount_days", nullable = false)
+    public int getSubMinAmountDays() {
         return subMinAmountDays;
     }
 
-    public void setSubMinAmountDays(Integer subMinAmountDays) {
+    public void setSubMinAmountDays(int subMinAmountDays) {
         this.subMinAmountDays = subMinAmountDays;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Subscriptions that = (Subscriptions) o;
-
-        if (subId != that.subId) return false;
-        if (Double.compare(that.subPrice, subPrice) != 0) return false;
-        if (subName != null ? !subName.equals(that.subName) : that.subName != null) return false;
-        if (subUrl != null ? !subUrl.equals(that.subUrl) : that.subUrl != null) return false;
-        if (subInformation != null ? !subInformation.equals(that.subInformation) : that.subInformation != null)
-            return false;
-        if (subMinAmountDays != null ? !subMinAmountDays.equals(that.subMinAmountDays) : that.subMinAmountDays != null)
-            return false;
-
-        return true;
+    @Basic
+    @Column(name = "category_id", nullable = true)
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (subId ^ (subId >>> 32));
-        result = 31 * result + (subName != null ? subName.hashCode() : 0);
-        result = 31 * result + (subUrl != null ? subUrl.hashCode() : 0);
-        result = 31 * result + (subInformation != null ? subInformation.hashCode() : 0);
-        temp = Double.doubleToLongBits(subPrice);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (subMinAmountDays != null ? subMinAmountDays.hashCode() : 0);
-        return result;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }

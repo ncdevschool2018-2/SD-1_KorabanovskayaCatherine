@@ -1,49 +1,32 @@
 package com.netcracker.edu.backend.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
+@Table(name = "order", schema = "eduproject")
 public class Order {
-    private long orderId;
-    private long billingAccountId;
-    private long subId;
+    private Long orderId;
     private String orderStatus;
-    private double orderPriceInDay;
+    private Double orderPriceInDay;
     private Date orderStartDate;
     private Date orderEndDate;
 
+    private Long subId;
+    private Long billingAccountId;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    @Basic
-    @Column(name = "billing_account_id", nullable = false)
-    public long getBillingAccountId() {
-        return billingAccountId;
-    }
-
-    public void setBillingAccountId(long billingAccountId) {
-        this.billingAccountId = billingAccountId;
-    }
-
-    @Basic
-    @Column(name = "sub_id", nullable = false)
-    public long getSubId() {
-        return subId;
-    }
-
-    public void setSubId(long subId) {
-        this.subId = subId;
     }
 
     @Basic
@@ -57,12 +40,12 @@ public class Order {
     }
 
     @Basic
-    @Column(name = "order_price_in_day", nullable = false, precision = 0)
-    public double getOrderPriceInDay() {
+    @Column(name = "order_price_in_day", nullable = false)
+    public Double getOrderPriceInDay() {
         return orderPriceInDay;
     }
 
-    public void setOrderPriceInDay(double orderPriceInDay) {
+    public void setOrderPriceInDay(Double orderPriceInDay) {
         this.orderPriceInDay = orderPriceInDay;
     }
 
@@ -86,4 +69,23 @@ public class Order {
         this.orderEndDate = orderEndDate;
     }
 
+    @Basic
+    @Column(name = "sub_id", nullable = false)
+    public Long getSubId() {
+        return subId;
+    }
+
+    public void setSubId(Long subId) {
+        this.subId = subId;
+    }
+
+    @Basic
+    @Column(name = "billing_account_id", nullable = false)
+    public Long getBillingAccountId() {
+        return billingAccountId;
+    }
+
+    public void setBillingAccountId(Long billingAccountId) {
+        this.billingAccountId = billingAccountId;
+    }
 }

@@ -4,19 +4,20 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Category {
-    private int categoryId;
+    private Integer categoryId;
     private String categoryName;
 
     @Id
     @Column(name = "category_id", nullable = false)
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -30,4 +31,17 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(categoryId, category.categoryId) &&
+                Objects.equals(categoryName, category.categoryName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryId, categoryName);
+    }
 }

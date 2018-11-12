@@ -1,24 +1,38 @@
 package com.netcracker.edu.backend.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Table(name = "company", schema = "eduproject")
 public class Company {
-    private long companyId;
+    private Long companyId;
     private String companyName;
     private String companyDomainName;
-    private int maxAmountAvailableSubs;
+    private Integer maxAmountAvailableSubs;
+
+    public Company() {
+    }
+
+    public Company(String companyName, String companyDomainName) {
+        this.companyName = companyName;
+        this.companyDomainName = companyDomainName;
+    }
+
+    public Company(String companyName, String companyDomainName, Integer maxAmountAvailableSubs) {
+        this.companyName = companyName;
+        this.companyDomainName = companyDomainName;
+        this.maxAmountAvailableSubs = maxAmountAvailableSubs;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_id", nullable = false)
-    public long getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(long companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
@@ -44,11 +58,37 @@ public class Company {
 
     @Basic
     @Column(name = "max_amount_available_subs", nullable = false)
-    public int getMaxAmountAvailableSubs() {
+    public Integer getMaxAmountAvailableSubs() {
         return maxAmountAvailableSubs;
     }
 
-    public void setMaxAmountAvailableSubs(int maxAmountAvailableSubs) {
+    public void setMaxAmountAvailableSubs(Integer maxAmountAvailableSubs) {
         this.maxAmountAvailableSubs = maxAmountAvailableSubs;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Company company = (Company) o;
+        return Objects.equals(companyId, company.companyId) &&
+                Objects.equals(companyName, company.companyName) &&
+                Objects.equals(companyDomainName, company.companyDomainName) &&
+                Objects.equals(maxAmountAvailableSubs, company.maxAmountAvailableSubs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(companyId, companyName, companyDomainName, maxAmountAvailableSubs);
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyId=" + companyId +
+                ", companyName='" + companyName + '\'' +
+                ", companyDomainName='" + companyDomainName + '\'' +
+                ", maxAmountAvailableSubs=" + maxAmountAvailableSubs +
+                '}';
     }
 }

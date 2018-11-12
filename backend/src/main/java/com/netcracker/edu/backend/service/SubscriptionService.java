@@ -1,14 +1,14 @@
 package com.netcracker.edu.backend.service;
 
-import com.netcracker.edu.backend.entity.CompanySubscription;
+import com.netcracker.edu.backend.entity.Subscription;
 
 import java.util.Optional;
 
-public interface CompanySubscriptionService {
+public interface SubscriptionService {
 
-    CompanySubscription saveCompanySubscription(CompanySubscription subscription);
-    Optional<CompanySubscription> getCompanySubscriptionById(Long id);
-    Iterable<CompanySubscription> getAllCompanySubscriptions();
-    void deleteCompanySubscription(Long id);
+    Subscription saveSubscription(Subscription subscription);
+    Optional<Subscription> getSubscriptionById(Long id);
+    Iterable<Subscription> getAllSubscriptions();
+    void deleteSubscriptionById(Long id);
 
 }

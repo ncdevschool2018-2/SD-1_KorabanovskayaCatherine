@@ -1,8 +1,8 @@
 package com.netcracker.edu.backend.controller;
 
 
-import com.netcracker.edu.backend.entity.CompanySubscription;
-import com.netcracker.edu.backend.service.CompanySubscriptionService;
+import com.netcracker.edu.backend.entity.Subscription;
+import com.netcracker.edu.backend.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,44 +16,44 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/subscriptions")
-public class CompanySubscriptionController {
+public class SubscriptionController {
 
-    private CompanySubscriptionService service;
+    private SubscriptionService service;
 
     @Autowired
-    public CompanySubscriptionController(CompanySubscriptionService companySubscriptionService) {
-        this.service = companySubscriptionService;
+    public SubscriptionController(SubscriptionService service) {
+        this.service = service;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<CompanySubscription> getCompanySubscriptionById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Subscription> getSubscription(@PathVariable(name = "id") Long id) {
 
         //
-        Optional<CompanySubscription> companySubscription = service.getCompanySubscriptionById(id);
+        Optional<Subscription> subscription = service.getSubscriptionById(id);
 
         // isPresent() -
-        if(companySubscription.isPresent()) {
-            return ResponseEntity.ok(companySubscription.get());
+        if(subscription.isPresent()) {
+            return ResponseEntity.ok(subscription.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Iterable<CompanySubscription> getAllCompanySubscriptions() {
-        return service.getAllCompanySubscriptions();
+    public Iterable<Subscription> getAllSubscriptions() {
+        return service.getAllSubscriptions();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public CompanySubscription saveCompanySubscription(@RequestBody CompanySubscription subscription) {
-        return service.saveCompanySubscription(subscription);
+    public Subscription saveSubscription(@RequestBody Subscription subscription) {
+        return service.saveSubscription(subscription);
     }
 
 
-    // ResponseEntity<CompanySubscription> ??
+    // ResponseEntity<Subscription> ??
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteCompanySubscription(@PathVariable(name = "id") Long id) {
-        service.deleteCompanySubscription(id);
+    public ResponseEntity deleteSubscription(@PathVariable(name = "id") Long id) {
+        service.deleteSubscriptionById(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,39 +1,30 @@
 package com.netcracker.edu.backend.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Subscription {
-    private long subId;
-    private long ownerId;
+    private Long subId;
     private String subName;
     private String subUrl;
     private String subInformation;
-    private double subPrice;
-    private int subMinAmountDays;
-    private Integer categoryId;
+    private Double subPrice;
+    private Integer subMinAmountDays;
+
+    private Company company;
+    private Category category;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_id", nullable = false)
-    public long getSubId() {
+    public Long getSubId() {
         return subId;
     }
 
-    public void setSubId(long subId) {
+    public void setSubId(Long subId) {
         this.subId = subId;
-    }
-
-    @Basic
-    @Column(name = "owner_id", nullable = false)
-    public long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
     }
 
     @Basic
@@ -68,31 +59,43 @@ public class Subscription {
 
     @Basic
     @Column(name = "sub_price", nullable = false, precision = 0)
-    public double getSubPrice() {
+    public Double getSubPrice() {
         return subPrice;
     }
 
-    public void setSubPrice(double subPrice) {
+    public void setSubPrice(Double subPrice) {
         this.subPrice = subPrice;
     }
 
     @Basic
     @Column(name = "sub_min_amount_days", nullable = false)
-    public int getSubMinAmountDays() {
+    public Integer getSubMinAmountDays() {
         return subMinAmountDays;
     }
 
-    public void setSubMinAmountDays(int subMinAmountDays) {
+    public void setSubMinAmountDays(Integer subMinAmountDays) {
         this.subMinAmountDays = subMinAmountDays;
     }
 
-    @Basic
-    @Column(name = "category_id", nullable = true)
-    public Integer getCategoryId() {
-        return categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = true)
+    @JsonIgnore
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    @JsonIgnore
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

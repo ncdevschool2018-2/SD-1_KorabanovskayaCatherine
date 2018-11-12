@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class CompanySubscriptionServiceImpl implements SubscriptionService {
+public class SubscriptionServiceImpl implements SubscriptionService {
 
     private SubscriptionRepository repository;
 
     @Autowired
-    public CompanySubscriptionServiceImpl(SubscriptionRepository repository) {
+    public SubscriptionServiceImpl(SubscriptionRepository repository) {
         this.repository = repository;
     }
 

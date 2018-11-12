@@ -1,10 +1,10 @@
 package com.netcracker.edu.backend.repository;
 
-import com.netcracker.edu.backend.entity.Subscription;
+
+import com.netcracker.edu.backend.entity.Company;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
-
+public interface CompanyRepository extends CrudRepository<Company, Long> {
 }

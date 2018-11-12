@@ -1,37 +1,42 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Objects;
 
 @Entity
 @Table(name = "billing-operation", schema = "eduproject")
 public class BillingOperation {
-    private long operationId;
-    private long billingAccountId;
+    private Long operationId;
     private Date operationDate;
     private Time operationTime;
-    private double amountPayment;
+    private Double amountPayment;
     private String operationRecord;
+    private BillingAccount billingAccount;
+
+    public BillingOperation() {
+    }
+
+    public BillingOperation(Date operationDate, Time operationTime, Double amountPayment, String operationRecord, BillingAccount billingAccount) {
+        this.operationDate = operationDate;
+        this.operationTime = operationTime;
+        this.amountPayment = amountPayment;
+        this.operationRecord = operationRecord;
+        this.billingAccount = billingAccount;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "operation_id", nullable = false)
-    public long getOperationId() {
+    public Long getOperationId() {
         return operationId;
     }
 
-    public void setOperationId(long operationId) {
+    public void setOperationId(Long operationId) {
         this.operationId = operationId;
-    }
-
-    @Basic
-    @Column(name = "billing_account_id", nullable = false)
-    public long getBillingAccountId() {
-        return billingAccountId;
-    }
-
-    public void setBillingAccountId(long billingAccountId) {
-        this.billingAccountId = billingAccountId;
     }
 
     @Basic
@@ -56,11 +61,11 @@ public class BillingOperation {
 
     @Basic
     @Column(name = "amount_payment", nullable = false, precision = 0)
-    public double getAmountPayment() {
+    public Double getAmountPayment() {
         return amountPayment;
     }
 
-    public void setAmountPayment(double amountPayment) {
+    public void setAmountPayment(Double amountPayment) {
         this.amountPayment = amountPayment;
     }
 
@@ -74,4 +79,44 @@ public class BillingOperation {
         this.operationRecord = operationRecord;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "billing_account_id", nullable = false)
+    @JsonIgnore
+    public BillingAccount getBillingAccount() {
+        return billingAccount;
+    }
+
+    public void setBillingAccount(BillingAccount billingAccount) {
+        this.billingAccount = billingAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BillingOperation that = (BillingOperation) o;
+        return Objects.equals(operationId, that.operationId) &&
+                Objects.equals(operationDate, that.operationDate) &&
+                Objects.equals(operationTime, that.operationTime) &&
+                Objects.equals(amountPayment, that.amountPayment) &&
+                Objects.equals(operationRecord, that.operationRecord) &&
+                Objects.equals(billingAccount, that.billingAccount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operationId, operationDate, operationTime, amountPayment, operationRecord, billingAccount);
+    }
+
+    @Override
+    public String toString() {
+        return "BillingOperation{" +
+                "operationId=" + operationId +
+                ", operationDate=" + operationDate +
+                ", operationTime=" + operationTime +
+                ", amountPayment=" + amountPayment +
+                ", operationRecord='" + operationRecord + '\'' +
+                ", billingAccount=" + billingAccount +
+                '}';
+    }
 }

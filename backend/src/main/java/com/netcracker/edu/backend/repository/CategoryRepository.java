@@ -1,10 +1,9 @@
 package com.netcracker.edu.backend.repository;
 
-import com.netcracker.edu.backend.entity.Subscription;
+import com.netcracker.edu.backend.entity.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
-
+public interface CategoryRepository extends CrudRepository<Category, Integer> {
 }

@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> getOrderById(Long id) {
+    public Optional<Order> getOrder(Long id) {
         return repository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrderById(Long id) {
+    public void deleteOrder(Long id) {
         repository.deleteById(id);
     }
 }

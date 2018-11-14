@@ -1,23 +1,32 @@
 package com.netcracker.edu.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "eduproject")
 public class User {
+
     private Long userId;
-    private String userLogin;
-    private String userPassword;
-    private Role role;
+    private String login;
+    private String password;
+    private String role;
     private Company company;
-//    private UserData userData;
 
     public User() {
+    }
+
+    public User(String userLogin, String userPassword, String role) {
+        this.login = userLogin;
+        this.password = userPassword;
+        this.role = role;
+    }
+
+    public User(String userLogin, String userPassword, String role, Company company) {
+        this.login = userLogin;
+        this.password = userPassword;
+        this.role = role;
+        this.company = company;
     }
 
     @Id
@@ -31,41 +40,35 @@ public class User {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "user_login", nullable = false, length = 45)
-    public String getUserLogin() {
-        return userLogin;
+    @Column(name = "login", nullable = false, length = 45)
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setLogin(String userLogin) {
+        this.login = userLogin;
     }
 
-    @Basic
-    @Column(name = "user_password", nullable = false, length = 45)
-    public String getUserPassword() {
-        return userPassword;
+    @Column(name = "password", nullable = false, length = 45)
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String userPassword) {
+        this.password = userPassword;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JsonIgnore
-    public Role getRole() {
+    @Column(name = "role", nullable = false)
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "company", nullable = true)
     public Company getCompany() {
         return company;
     }
@@ -74,33 +77,26 @@ public class User {
         this.company = company;
     }
 
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-//    public UserData getUserData() {
-//        return userData;
-//    }
-//
-//    public void setUserData(UserData userData) {
-//        this.userData = userData;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(userId, user.userId) &&
-                Objects.equals(userLogin, user.userLogin) &&
-                Objects.equals(userPassword, user.userPassword) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
                 Objects.equals(role, user.role) &&
                 Objects.equals(company, user.company);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userLogin, userPassword, role, company);
+        return Objects.hash(userId, login, password, role, company);
     }
 
-    //TODO: equals() and hashCode(), constructors
-
-    //TODO: toString(), который бы частично скрывал информацию пользователя
+    @Override
+    public String toString() {
+        return "User{}";
+    }
 }
+

@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable(name = "id") Long id) {
-        Optional<User> user = service.getUserById(id);
+        Optional<User> user = service.getUser(id);
 
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
@@ -42,7 +42,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUser(@PathVariable(name = "id") Long id) {
-        service.deleteUserById(id);
+        service.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 }

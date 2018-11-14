@@ -27,7 +27,7 @@ public class BillingAccountController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<BillingAccount> getBillingAccount(@PathVariable(name = "id") Long id) {
-        Optional<BillingAccount> account = service.getBillingAccountById(id);
+        Optional<BillingAccount> account = service.getBillingAccount(id);
 
         if(account.isPresent()) {
             return ResponseEntity.ok(account.get());
@@ -43,7 +43,7 @@ public class BillingAccountController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteBillingAccount(@PathVariable(name = "id") Long id) {
-        service.deleteBillingAccountById(id);
+        service.deleteBillingAccount(id);
         return ResponseEntity.noContent().build();
     }
 

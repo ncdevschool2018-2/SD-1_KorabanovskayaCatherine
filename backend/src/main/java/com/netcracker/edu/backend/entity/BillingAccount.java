@@ -1,21 +1,27 @@
 package com.netcracker.edu.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "billing-account", schema = "eduproject")
+@Table(name = "billing_account", schema = "eduproject")
 public class BillingAccount {
+
     private Long baId;
-    private Long baNumber;
+    private String baNumber;
     private Double baAccount;
     private Double baMaxDebt;
-//    private User user;
-    private Long userId;
+    private User user;
 
     public BillingAccount() {
+    }
+
+    public BillingAccount(String baNumber, Double baAccount, Double baMaxDebt, User user) {
+        this.baNumber = baNumber;
+        this.baAccount = baAccount;
+        this.baMaxDebt = baMaxDebt;
+        this.user = user;
     }
 
     @Id
@@ -29,17 +35,15 @@ public class BillingAccount {
         this.baId = baId;
     }
 
-    @Basic
-    @Column(name = "ba_number", nullable = false)
-    public Long getBaNumber() {
+    @Column(name = "ba_number", nullable = false, length = 45)
+    public String getBaNumber() {
         return baNumber;
     }
 
-    public void setBaNumber(Long baNumber) {
+    public void setBaNumber(String baNumber) {
         this.baNumber = baNumber;
     }
 
-    @Basic
     @Column(name = "ba_account", nullable = false, precision = 0)
     public Double getBaAccount() {
         return baAccount;
@@ -49,7 +53,6 @@ public class BillingAccount {
         this.baAccount = baAccount;
     }
 
-    @Basic
     @Column(name = "ba_max_debt", nullable = false, precision = 0)
     public Double getBaMaxDebt() {
         return baMaxDebt;
@@ -59,26 +62,14 @@ public class BillingAccount {
         this.baMaxDebt = baMaxDebt;
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @JsonIgnore
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
-
-    @Basic
-    @Column(name = "user_id", nullable = false)
-    public Long getUserId() {
-        return userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -89,12 +80,24 @@ public class BillingAccount {
         return Objects.equals(baId, that.baId) &&
                 Objects.equals(baNumber, that.baNumber) &&
                 Objects.equals(baAccount, that.baAccount) &&
-                Objects.equals(baMaxDebt, that.baMaxDebt);
+                Objects.equals(baMaxDebt, that.baMaxDebt) &&
+                Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baId, baNumber, baAccount, baMaxDebt);
+        return Objects.hash(baId, baNumber, baAccount, baMaxDebt, user);
+    }
+
+    @Override
+    public String toString() {
+        return "BillingAccount{" +
+                "baId=" + baId +
+                ", baNumber=" + "********" + baNumber.substring(baNumber.length() - 4) +
+                ", baAccount=" + baAccount +
+                ", baMaxDebt=" + baMaxDebt +
+                ", user=" + user +
+                '}';
     }
 }
-    //TODO: toString() показывающий неполный номер
+

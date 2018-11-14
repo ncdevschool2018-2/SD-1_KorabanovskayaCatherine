@@ -24,7 +24,7 @@ public class BillingAccountServiceImpl implements BillingAccountService {
     }
 
     @Override
-    public Optional<BillingAccount> getBillingAccountById(Long id) {
+    public Optional<BillingAccount> getBillingAccount(Long id) {
         return repository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class BillingAccountServiceImpl implements BillingAccountService {
     }
 
     @Override
-    public void deleteBillingAccountById(Long id) {
+    public void deleteBillingAccount(Long id) {
         repository.deleteById(id);
     }
 }

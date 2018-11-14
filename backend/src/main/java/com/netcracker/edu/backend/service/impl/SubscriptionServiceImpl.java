@@ -24,7 +24,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Optional<Subscription> getSubscriptionById(Long id) {
+    public Optional<Subscription> getSubscription(Long id) {
         return repository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public void deleteSubscriptionById(Long id) {
+    public void deleteSubscription(Long id) {
         repository.deleteById(id);
     }
 }

@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface SubscriptionService {
 
-    Subscription saveSubscription(Subscription subscription);
-    Optional<Subscription> getSubscriptionById(Long id);
     Iterable<Subscription> getAllSubscriptions();
-    void deleteSubscriptionById(Long id);
+    Optional<Subscription> getSubscription(Long id);
+    Subscription saveSubscription(Subscription subscription);
+    void deleteSubscription(Long id);
 
 }

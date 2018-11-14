@@ -29,7 +29,7 @@ public class SubscriptionController {
     public ResponseEntity<Subscription> getSubscription(@PathVariable(name = "id") Long id) {
 
         //
-        Optional<Subscription> subscription = service.getSubscriptionById(id);
+        Optional<Subscription> subscription = service.getSubscription(id);
 
         // isPresent() -
         if(subscription.isPresent()) {
@@ -53,7 +53,7 @@ public class SubscriptionController {
     // ResponseEntity<Subscription> ??
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteSubscription(@PathVariable(name = "id") Long id) {
-        service.deleteSubscriptionById(id);
+        service.deleteSubscription(id);
         return ResponseEntity.noContent().build();
     }
 }

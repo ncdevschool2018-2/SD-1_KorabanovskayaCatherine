@@ -30,7 +30,7 @@ public class OrderController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Order> getOrder(@PathVariable(name = "id") Long id) {
-        Optional<Order> order = service.getOrderById(id);
+        Optional<Order> order = service.getOrder(id);
 
         if(order.isPresent()) {
             return ResponseEntity.ok(order.get());
@@ -47,7 +47,7 @@ public class OrderController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteOrder(@PathVariable(name = "id") Long id) {
-        service.deleteOrderById(id);
+        service.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
 }

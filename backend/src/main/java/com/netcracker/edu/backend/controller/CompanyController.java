@@ -27,7 +27,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Company> getCompany(@PathVariable(name = "id") Long id) {
-        Optional<Company> company = service.getCompanyById(id);
+        Optional<Company> company = service.getCompany(id);
         if(company.isPresent()) {
             return ResponseEntity.ok(company.get());
         } else {
@@ -42,7 +42,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteCompany(@PathVariable(name = "id") Long id) {
-        service.deleteCompanyById(id);
+        service.deleteCompany(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -6,10 +6,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "company", schema = "eduproject")
 public class Company {
+
     private Long companyId;
     private String companyName;
     private String companyDomainName;
-    private Integer maxAmountAvailableSubs;
 
     public Company() {
     }
@@ -17,12 +17,6 @@ public class Company {
     public Company(String companyName, String companyDomainName) {
         this.companyName = companyName;
         this.companyDomainName = companyDomainName;
-    }
-
-    public Company(String companyName, String companyDomainName, Integer maxAmountAvailableSubs) {
-        this.companyName = companyName;
-        this.companyDomainName = companyDomainName;
-        this.maxAmountAvailableSubs = maxAmountAvailableSubs;
     }
 
     @Id
@@ -36,7 +30,6 @@ public class Company {
         this.companyId = companyId;
     }
 
-    @Basic
     @Column(name = "company_name", nullable = false, length = 45)
     public String getCompanyName() {
         return companyName;
@@ -46,7 +39,6 @@ public class Company {
         this.companyName = companyName;
     }
 
-    @Basic
     @Column(name = "company_domain_name", nullable = false, length = 60)
     public String getCompanyDomainName() {
         return companyDomainName;
@@ -56,16 +48,6 @@ public class Company {
         this.companyDomainName = companyDomainName;
     }
 
-    @Basic
-    @Column(name = "max_amount_available_subs", nullable = false)
-    public Integer getMaxAmountAvailableSubs() {
-        return maxAmountAvailableSubs;
-    }
-
-    public void setMaxAmountAvailableSubs(Integer maxAmountAvailableSubs) {
-        this.maxAmountAvailableSubs = maxAmountAvailableSubs;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,13 +55,12 @@ public class Company {
         Company company = (Company) o;
         return Objects.equals(companyId, company.companyId) &&
                 Objects.equals(companyName, company.companyName) &&
-                Objects.equals(companyDomainName, company.companyDomainName) &&
-                Objects.equals(maxAmountAvailableSubs, company.maxAmountAvailableSubs);
+                Objects.equals(companyDomainName, company.companyDomainName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyId, companyName, companyDomainName, maxAmountAvailableSubs);
+        return Objects.hash(companyId, companyName, companyDomainName);
     }
 
     @Override
@@ -88,7 +69,6 @@ public class Company {
                 "companyId=" + companyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyDomainName='" + companyDomainName + '\'' +
-                ", maxAmountAvailableSubs=" + maxAmountAvailableSubs +
                 '}';
     }
 }

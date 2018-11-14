@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface UserService {
 
     Iterable<User> getAllUsers();
-    Optional<User> getUserById(Long id);
+    Optional<User> getUser(Long id);
     User saveUser(User user);
-    void deleteUserById(Long id);
+    void deleteUser(Long id);
 
 }

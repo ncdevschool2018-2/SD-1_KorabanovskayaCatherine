@@ -24,7 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<Company> getCompanyById(Long id) {
+    public Optional<Company> getCompany(Long id) {
         return repository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void deleteCompanyById(Long id) {
+    public void deleteCompany(Long id) {
         repository.deleteById(id);
     }
 }

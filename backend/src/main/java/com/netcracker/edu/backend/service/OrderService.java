@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface OrderService {
 
     Iterable<Order> getAllOrders();
-    Optional<Order> getOrderById(Long id);
+    Optional<Order> getOrder(Long id);
     Order saveOrder(Order order);
-    void deleteOrderById(Long id);
+    void deleteOrder(Long id);
 }

@@ -1,33 +1,27 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.netcracker.edu.backend.entity.enums.Role;
+
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "eduproject")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
 
     private Long userId;
     private String login;
     private String password;
-    private String role;
-    private Company company;
+    private Role role;
+//    private Set<BillingAccount> billingAccounts;
+    private Account account;
 
     public User() {
     }
 
-    public User(String userLogin, String userPassword, String role) {
-        this.login = userLogin;
-        this.password = userPassword;
-        this.role = role;
-    }
-
-    public User(String userLogin, String userPassword, String role, Company company) {
-        this.login = userLogin;
-        this.password = userPassword;
-        this.role = role;
-        this.company = company;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +34,7 @@ public class User {
         this.userId = userId;
     }
 
-    @Column(name = "login", nullable = false, length = 45)
+    @Column(name = "user_login", nullable = false, length = 45)
     public String getLogin() {
         return login;
     }
@@ -49,7 +43,7 @@ public class User {
         this.login = userLogin;
     }
 
-    @Column(name = "password", nullable = false, length = 45)
+    @Column(name = "user_password", nullable = false, length = 45)
     public String getPassword() {
         return password;
     }
@@ -58,45 +52,33 @@ public class User {
         this.password = userPassword;
     }
 
-    @Column(name = "role", nullable = false)
-    public String getRole() {
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "user_role", nullable = false)
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "company", nullable = true)
-    public Company getCompany() {
-        return company;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    public Set<BillingAccount> getBillingAccounts() {
+//        return billingAccounts;
+//    }
+//
+//    public void setBillingAccounts(Set<BillingAccount> billingAccounts) {
+//        this.billingAccounts = billingAccounts;
+//    }
+
+
+    @OneToOne (optional=false, mappedBy="user")
+    public Account getAccount() {
+        return account;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(role, user.role) &&
-                Objects.equals(company, user.company);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, login, password, role, company);
-    }
-
-    @Override
-    public String toString() {
-        return "User{}";
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
 

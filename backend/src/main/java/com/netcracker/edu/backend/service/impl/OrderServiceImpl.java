@@ -1,11 +1,13 @@
 package com.netcracker.edu.backend.service.impl;
 
 import com.netcracker.edu.backend.entity.Order;
+import com.netcracker.edu.backend.entity.enums.Status;
 import com.netcracker.edu.backend.repository.OrderRepository;
 import com.netcracker.edu.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.util.Optional;
 
 @Component
@@ -36,5 +38,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrder(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Order> getOrdersByBillingAccount(Long id) {
+        return repository.getOrdersByBillingAccountId(id);
+    }
+
+    @Override
+    public Iterable<Order> getOrdersByUserId(Long id) {
+        return repository.getOrdersByUserId(id);
     }
 }

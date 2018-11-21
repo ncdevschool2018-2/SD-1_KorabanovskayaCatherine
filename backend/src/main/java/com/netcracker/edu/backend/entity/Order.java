@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
+import com.netcracker.edu.backend.entity.enums.Status;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -9,23 +11,24 @@ import java.util.Objects;
 public class Order {
 
     private Long orderId;
-    private String orderStatus;
+    private Status orderStatus;
     private Double orderPriceInDay;
     private Date orderStartDate;
     private Integer amountDays;
     private Subscription subscription;
-    private BillingAccount billingAccount;
+    private Long billingAccountId;
 
     public Order() {
     }
 
-    public Order(String orderStatus, Double orderPriceInDay, Date orderStartDate, Integer amountDays, Subscription subscription, BillingAccount billingAccount) {
+    public Order(Status orderStatus, Double orderPriceInDay, Date orderStartDate,
+                 Integer amountDays, Subscription subscription, Long billingAccount) {
         this.orderStatus = orderStatus;
         this.orderPriceInDay = orderPriceInDay;
         this.orderStartDate = orderStartDate;
         this.amountDays = amountDays;
         this.subscription = subscription;
-        this.billingAccount = billingAccount;
+        this.billingAccountId = billingAccount;
     }
 
     @Id
@@ -39,12 +42,13 @@ public class Order {
         this.orderId = orderId;
     }
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "order_status", nullable = false, length = 45)
-    public String getOrderStatus() {
+    public Status getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(Status orderStatus) {
         this.orderStatus = orderStatus;
     }
 
@@ -75,6 +79,15 @@ public class Order {
         this.amountDays = amountDays;
     }
 
+    @Column(name = "billing_account_id", nullable = false)
+    public Long getBillingAccountId() {
+        return billingAccountId;
+    }
+
+    public void setBillingAccountId(Long billingAccountId) {
+        this.billingAccountId = billingAccountId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "sub_id", nullable = false)
     public Subscription getSubscription() {
@@ -83,16 +96,6 @@ public class Order {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "billing_account_id", nullable = false)
-    public BillingAccount getBillingAccount() {
-        return billingAccount;
-    }
-
-    public void setBillingAccount(BillingAccount billingAccount) {
-        this.billingAccount = billingAccount;
     }
 
     @Override
@@ -106,12 +109,12 @@ public class Order {
                 Objects.equals(orderStartDate, order.orderStartDate) &&
                 Objects.equals(amountDays, order.amountDays) &&
                 Objects.equals(subscription, order.subscription) &&
-                Objects.equals(billingAccount, order.billingAccount);
+                Objects.equals(billingAccountId, order.billingAccountId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, orderStatus, orderPriceInDay, orderStartDate, amountDays, subscription, billingAccount);
+        return Objects.hash(orderId, orderStatus, orderPriceInDay, orderStartDate, amountDays, subscription, billingAccountId);
     }
 
     @Override
@@ -123,7 +126,7 @@ public class Order {
                 ", orderStartDate=" + orderStartDate +
                 ", amountDays=" + amountDays +
                 ", subscriptionId=" + subscription.getSubId() +
-                ", billingAccountId=" + billingAccount.getBaId() +
+                ", billingAccountId=" + billingAccountId +
                 '}';
     }
 }

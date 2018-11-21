@@ -37,4 +37,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void deleteSubscription(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Subscription> getUserSubscriptions(Long ownerId) {
+        return repository.getSubscriptionByOwnerId(ownerId);
+    }
 }

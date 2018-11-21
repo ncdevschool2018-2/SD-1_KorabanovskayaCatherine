@@ -7,7 +7,10 @@ import java.util.Optional;
 public interface CompanyService {
 
     Iterable<Company> getAllCompanies();
+
     Optional<Company> getCompany(Long id);
+
     Company saveCompany(Company company);
+
     void deleteCompany(Long id);
 }

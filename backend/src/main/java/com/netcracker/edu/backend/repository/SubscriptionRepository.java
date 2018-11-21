@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
+    Iterable<Subscription> getSubscriptionByOwnerId(Long ownerId);
 }

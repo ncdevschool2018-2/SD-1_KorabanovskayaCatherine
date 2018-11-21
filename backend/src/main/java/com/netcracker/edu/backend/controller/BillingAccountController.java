@@ -47,4 +47,9 @@ public class BillingAccountController {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public Iterable<BillingAccount> getUserBillingAccount(@PathVariable(name = "id") Long id) {
+        return service.getUserBillingAccounts(id);
+    }
+
 }

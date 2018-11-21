@@ -1,7 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -12,16 +11,9 @@ public class BillingAccount {
     private String baNumber;
     private Double baAccount;
     private Double baMaxDebt;
-    private User user;
+    private Long accountId;
 
     public BillingAccount() {
-    }
-
-    public BillingAccount(String baNumber, Double baAccount, Double baMaxDebt, User user) {
-        this.baNumber = baNumber;
-        this.baAccount = baAccount;
-        this.baMaxDebt = baMaxDebt;
-        this.user = user;
     }
 
     @Id
@@ -62,14 +54,13 @@ public class BillingAccount {
         this.baMaxDebt = baMaxDebt;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    public User getUser() {
-        return user;
+    @Column(name = "account_id", nullable = false)
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccountId(Long userId) {
+        this.accountId = userId;
     }
 
     @Override
@@ -81,12 +72,12 @@ public class BillingAccount {
                 Objects.equals(baNumber, that.baNumber) &&
                 Objects.equals(baAccount, that.baAccount) &&
                 Objects.equals(baMaxDebt, that.baMaxDebt) &&
-                Objects.equals(user, that.user);
+                Objects.equals(accountId, that.accountId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baId, baNumber, baAccount, baMaxDebt, user);
+        return Objects.hash(baId, baNumber, baAccount, baMaxDebt, accountId);
     }
 
     @Override
@@ -96,7 +87,7 @@ public class BillingAccount {
                 ", baNumber=" + "********" + baNumber.substring(baNumber.length() - 4) +
                 ", baAccount=" + baAccount +
                 ", baMaxDebt=" + baMaxDebt +
-                ", user=" + user +
+                ", userId=" + accountId +
                 '}';
     }
 }

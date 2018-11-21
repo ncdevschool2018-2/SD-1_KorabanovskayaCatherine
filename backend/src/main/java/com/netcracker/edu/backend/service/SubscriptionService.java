@@ -7,8 +7,12 @@ import java.util.Optional;
 public interface SubscriptionService {
 
     Iterable<Subscription> getAllSubscriptions();
+
     Optional<Subscription> getSubscription(Long id);
+
     Subscription saveSubscription(Subscription subscription);
+
     void deleteSubscription(Long id);
 
+    Iterable<Subscription> getUserSubscriptions(Long ownerId);
 }

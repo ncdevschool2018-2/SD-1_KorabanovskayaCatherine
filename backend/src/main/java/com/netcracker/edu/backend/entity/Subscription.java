@@ -13,26 +13,27 @@ public class Subscription {
     private Integer subMinAmountDays;
     private String subUrl;
     private String subInformation;
-    private Company company;
+    private Long ownerId;
 
     public Subscription() {
 
     }
 
-    public Subscription(String subName, Double subPrice, Integer subMinAmountDays, Company company) {
+    public Subscription(String subName, Double subPrice, Integer subMinAmountDays, Long ownerId) {
         this.subName = subName;
         this.subPrice = subPrice;
         this.subMinAmountDays = subMinAmountDays;
-        this.company = company;
+        this.ownerId = ownerId;
     }
 
-    public Subscription(String subName, Double subPrice, Integer subMinAmountDays, String subUrl, String subInformation, Company company) {
+    public Subscription(String subName, Double subPrice, Integer subMinAmountDays,
+                        String subUrl, String subInformation, Long ownerId) {
         this.subName = subName;
         this.subPrice = subPrice;
         this.subMinAmountDays = subMinAmountDays;
         this.subUrl = subUrl;
         this.subInformation = subInformation;
-        this.company = company;
+        this.ownerId = ownerId;
     }
 
     @Id
@@ -91,14 +92,13 @@ public class Subscription {
         this.subInformation = subInformation;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    public Company getCompany() {
-        return company;
+    @Column(name = "owner_id", nullable = false)
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     @Override
@@ -112,12 +112,12 @@ public class Subscription {
                 Objects.equals(subMinAmountDays, that.subMinAmountDays) &&
                 Objects.equals(subUrl, that.subUrl) &&
                 Objects.equals(subInformation, that.subInformation) &&
-                Objects.equals(company, that.company);
+                Objects.equals(ownerId, that.ownerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subId, subName, subPrice, subMinAmountDays, subUrl, subInformation, company);
+        return Objects.hash(subId, subName, subPrice, subMinAmountDays, subUrl, subInformation, ownerId);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class Subscription {
                 ", subMinAmountDays=" + subMinAmountDays +
                 ", subUrl='" + subUrl + '\'' +
                 ", subInformation='" + subInformation + '\'' +
-                ", companyId=" + company.getCompanyId() +
+                ", ownerId=" + ownerId +
                 '}';
     }
 }

@@ -37,4 +37,9 @@ public class BillingAccountServiceImpl implements BillingAccountService {
     public void deleteBillingAccount(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Iterable<BillingAccount> getUserBillingAccounts(Long id) {
+        return repository.getBillingAccountsByAccountId(id);
+    }
 }

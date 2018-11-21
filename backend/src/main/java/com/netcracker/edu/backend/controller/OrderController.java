@@ -5,10 +5,7 @@ import com.netcracker.edu.backend.entity.Order;
 import com.netcracker.edu.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -40,7 +37,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Order saveOrder(Order order) {
+    public Order saveOrder(@RequestBody Order order) {
         return service.saveOrder(order);
     }
 
@@ -49,5 +46,15 @@ public class OrderController {
     public ResponseEntity deleteOrder(@PathVariable(name = "id") Long id) {
         service.deleteOrder(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/billing-account/{id}", method = RequestMethod.GET)
+    public Iterable<Order> getOrdersByBillingAccount(@PathVariable(name = "id") Long id) {
+        return service.getOrdersByBillingAccount(id);
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public Iterable<Order> getOrderByUser(@PathVariable(name = "id") Long id) {
+        return service.getOrdersByUserId(id);
     }
 }

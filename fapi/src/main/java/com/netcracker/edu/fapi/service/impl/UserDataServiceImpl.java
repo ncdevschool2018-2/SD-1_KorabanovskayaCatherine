@@ -27,15 +27,18 @@ public class UserDataServiceImpl implements UserDataService {
     }
 
     @Override
-    public UserViewModel getUser(Long id) {
-        return null;
-    }
-
-    @Override
     public UserViewModel saveUser(UserViewModel user) {
         return new RestTemplate().postForEntity(
                 backendServerUrl + "api/users",
                 user,
+                UserViewModel.class
+        ).getBody();
+    }
+
+    @Override
+    public UserViewModel getUser(Long id) {
+        return new RestTemplate().getForEntity(
+                backendServerUrl + "api/users/" + id,
                 UserViewModel.class
         ).getBody();
     }

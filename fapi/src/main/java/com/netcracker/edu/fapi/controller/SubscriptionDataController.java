@@ -36,10 +36,15 @@ public class SubscriptionDataController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteCompanySubscription(@PathVariable String id) {
-        service.deleteSubscription(Long.valueOf(id));
+    public void deleteCompanySubscription(@PathVariable Long id) {
+        service.deleteSubscription(id);
     }
 
+
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<List<SubscriptionViewModel>> getUserSubscriptions(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getUserSubscriptions(id));
+    }
 
     //TODO: make getSubscription
 }

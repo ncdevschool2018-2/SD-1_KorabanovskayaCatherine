@@ -45,4 +45,9 @@ public class BillingAccountDataController {
     public void deleteBillingAccount(@PathVariable Long id) {
         billingAccountDataService.deleteBillingAccount(id);
     }
+
+    @GetMapping(value = "user/{id}")
+    public ResponseEntity<List<BillingAccountViewModel>> getUserBillingAccounts(@PathVariable Long id) {
+        return ResponseEntity.ok(billingAccountDataService.getUserBillingAccounts(id));
+    }
 }

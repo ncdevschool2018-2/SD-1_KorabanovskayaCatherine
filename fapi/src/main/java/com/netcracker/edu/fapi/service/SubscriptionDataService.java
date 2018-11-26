@@ -12,4 +12,6 @@ public interface SubscriptionDataService {
     SubscriptionViewModel saveSubscription(SubscriptionViewModel subscription);
 
     void deleteSubscription(Long id);
+
+    List<SubscriptionViewModel> getUserSubscriptions(Long id);
 }

@@ -1,7 +1,9 @@
 package com.netcracker.edu.backend.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "billing_account", schema = "eduproject")
@@ -12,6 +14,7 @@ public class BillingAccount {
     private Double baAccount;
     private Double baMaxDebt;
     private Long accountId;
+    private Set<Order> orders = new HashSet<>(0);
 
     public BillingAccount() {
     }
@@ -63,32 +66,14 @@ public class BillingAccount {
         this.accountId = userId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BillingAccount that = (BillingAccount) o;
-        return Objects.equals(baId, that.baId) &&
-                Objects.equals(baNumber, that.baNumber) &&
-                Objects.equals(baAccount, that.baAccount) &&
-                Objects.equals(baMaxDebt, that.baMaxDebt) &&
-                Objects.equals(accountId, that.accountId);
+    @OneToMany
+    @JoinColumn(name = "billing_account_id")
+    public Set<Order> getOrders() {
+        return orders;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(baId, baNumber, baAccount, baMaxDebt, accountId);
-    }
-
-    @Override
-    public String toString() {
-        return "BillingAccount{" +
-                "baId=" + baId +
-                ", baNumber=" + "********" + baNumber.substring(baNumber.length() - 4) +
-                ", baAccount=" + baAccount +
-                ", baMaxDebt=" + baMaxDebt +
-                ", userId=" + accountId +
-                '}';
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }
 

@@ -13,7 +13,7 @@ public class OrderViewModel {
     private Date orderStartDate;
     private Integer amountDays;
     private SubscriptionViewModel subscription;
-    private BillingAccountViewModel billingAccount;
+    private Long billingAccountId;
 
     public OrderViewModel() {
     }
@@ -66,11 +66,11 @@ public class OrderViewModel {
         this.subscription = subscription;
     }
 
-    public BillingAccountViewModel getBillingAccount() {
-        return billingAccount;
+    public Long getBillingAccountId() {
+        return billingAccountId;
     }
 
-    public void setBillingAccount(BillingAccountViewModel billingAccount) {
-        this.billingAccount = billingAccount;
+    public void setBillingAccountId(Long billingAccountId) {
+        this.billingAccountId = billingAccountId;
     }
 }

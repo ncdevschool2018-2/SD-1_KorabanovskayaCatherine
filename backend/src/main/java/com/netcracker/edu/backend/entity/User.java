@@ -1,27 +1,21 @@
 package com.netcracker.edu.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.netcracker.edu.backend.entity.enums.Role;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "eduproject")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
 
     private Long userId;
     private String login;
     private String password;
     private Role role;
-//    private Set<BillingAccount> billingAccounts;
     private Account account;
 
     public User() {
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,17 +56,7 @@ public class User {
         this.role = role;
     }
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    public Set<BillingAccount> getBillingAccounts() {
-//        return billingAccounts;
-//    }
-//
-//    public void setBillingAccounts(Set<BillingAccount> billingAccounts) {
-//        this.billingAccounts = billingAccounts;
-//    }
-
-
-    @OneToOne (optional=false, mappedBy="user")
+    @OneToOne(mappedBy = "user")
     public Account getAccount() {
         return account;
     }
@@ -80,5 +64,6 @@ public class User {
     public void setAccount(Account account) {
         this.account = account;
     }
+
 }
 

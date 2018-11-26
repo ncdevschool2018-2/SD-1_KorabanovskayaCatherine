@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "account", schema = "eduproject")
@@ -21,6 +22,7 @@ public class Account {
 
     private User user;
     private Company company;
+    private Set<BillingAccount> billingAccounts = new HashSet<>();
 
     public Account() {
 
@@ -82,8 +84,8 @@ public class Account {
         this.registrationDate = registrationDate;
     }
 
-    @OneToOne (optional=false, cascade=CascadeType.ALL)
-    @JoinColumn (name="user_id")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -102,21 +104,13 @@ public class Account {
         this.company = company;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return Objects.equals(accountId, account.accountId) &&
-                Objects.equals(username, account.username) &&
-                Objects.equals(lastName, account.lastName) &&
-                Objects.equals(firstName, account.firstName) &&
-                Objects.equals(birthdayDate, account.birthdayDate) &&
-                Objects.equals(registrationDate, account.registrationDate);
+    @OneToMany
+    @JoinColumn(name = "account_id")
+    public Set<BillingAccount> getBillingAccounts() {
+        return billingAccounts;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(accountId, username, lastName, firstName, birthdayDate, registrationDate);
+    public void setBillingAccounts(Set<BillingAccount> billingAccounts) {
+        this.billingAccounts = billingAccounts;
     }
 }

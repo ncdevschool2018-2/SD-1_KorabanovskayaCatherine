@@ -9,7 +9,7 @@ public class UserViewModel {
     private String login;
     private String password;
     private String role;
-    private CompanyViewModel company;
+//    private AccountViewModel account;
 
     public UserViewModel() {
     }
@@ -46,11 +46,11 @@ public class UserViewModel {
         this.role = role;
     }
 
-    public CompanyViewModel getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyViewModel company) {
-        this.company = company;
-    }
+//    public AccountViewModel getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(AccountViewModel account) {
+//        this.account = account;
+//    }
 }

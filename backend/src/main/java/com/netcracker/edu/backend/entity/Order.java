@@ -21,16 +21,6 @@ public class Order {
     public Order() {
     }
 
-    public Order(Status orderStatus, Double orderPriceInDay, Date orderStartDate,
-                 Integer amountDays, Subscription subscription, Long billingAccount) {
-        this.orderStatus = orderStatus;
-        this.orderPriceInDay = orderPriceInDay;
-        this.orderStartDate = orderStartDate;
-        this.amountDays = amountDays;
-        this.subscription = subscription;
-        this.billingAccountId = billingAccount;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)
@@ -98,35 +88,4 @@ public class Order {
         this.subscription = subscription;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(orderId, order.orderId) &&
-                Objects.equals(orderStatus, order.orderStatus) &&
-                Objects.equals(orderPriceInDay, order.orderPriceInDay) &&
-                Objects.equals(orderStartDate, order.orderStartDate) &&
-                Objects.equals(amountDays, order.amountDays) &&
-                Objects.equals(subscription, order.subscription) &&
-                Objects.equals(billingAccountId, order.billingAccountId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(orderId, orderStatus, orderPriceInDay, orderStartDate, amountDays, subscription, billingAccountId);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", orderStatus='" + orderStatus + '\'' +
-                ", orderPriceInDay=" + orderPriceInDay +
-                ", orderStartDate=" + orderStartDate +
-                ", amountDays=" + amountDays +
-                ", subscriptionId=" + subscription.getSubId() +
-                ", billingAccountId=" + billingAccountId +
-                '}';
-    }
 }

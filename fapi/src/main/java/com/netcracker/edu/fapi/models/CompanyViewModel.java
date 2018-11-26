@@ -2,6 +2,10 @@ package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyViewModel {
 
@@ -35,4 +39,5 @@ public class CompanyViewModel {
     public void setCompanyDomainName(String companyDomainName) {
         this.companyDomainName = companyDomainName;
     }
+
 }

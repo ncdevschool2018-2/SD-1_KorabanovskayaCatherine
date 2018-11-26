@@ -11,7 +11,9 @@ public class SubscriptionViewModel {
     private Integer subMinAmountDays;
     private String subUrl;
     private String subInformation;
+    private String subImage;
     private CompanyViewModel company;
+    private CategoryViewModel category;
 
     public SubscriptionViewModel() {
     }
@@ -64,11 +66,27 @@ public class SubscriptionViewModel {
         this.subInformation = subInformation;
     }
 
+    public String getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(String subImage) {
+        this.subImage = subImage;
+    }
+
     public CompanyViewModel getCompany() {
         return company;
     }
 
     public void setCompany(CompanyViewModel company) {
         this.company = company;
+    }
+
+    public CategoryViewModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryViewModel category) {
+        this.category = category;
     }
 }

@@ -2,14 +2,16 @@ package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BillingAccountViewModel {
 
     private Long baId;
     private String baNumber;
-    private Double baAccount;
-    private Double baMaxDebt;
-    private UserViewModel user;
+    private Long accountId;
+    private Set<OrderViewModel> orders = new HashSet<>(0);
 
     public BillingAccountViewModel() {
     }
@@ -30,27 +32,19 @@ public class BillingAccountViewModel {
         this.baNumber = baNumber;
     }
 
-    public Double getBaAccount() {
-        return baAccount;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setBaAccount(Double baAccount) {
-        this.baAccount = baAccount;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
-    public Double getBaMaxDebt() {
-        return baMaxDebt;
+    public Set<OrderViewModel> getOrders() {
+        return orders;
     }
 
-    public void setBaMaxDebt(Double baMaxDebt) {
-        this.baMaxDebt = baMaxDebt;
-    }
-
-    public UserViewModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserViewModel user) {
-        this.user = user;
+    public void setOrders(Set<OrderViewModel> orders) {
+        this.orders = orders;
     }
 }

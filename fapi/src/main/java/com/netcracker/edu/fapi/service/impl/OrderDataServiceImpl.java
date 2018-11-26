@@ -47,4 +47,24 @@ public class OrderDataServiceImpl implements OrderDataService {
                 backendServerUrl + "api/orders/" + id
         );
     }
+
+    @Override
+    public List<OrderViewModel> getOrdersByBillingAccount(Long id) {
+        RestTemplate template = new RestTemplate();
+        OrderViewModel[] orders = template.getForObject(
+                backendServerUrl + "api/orders/billing-account/" + id,
+                OrderViewModel[].class
+        );
+        return orders == null ? Collections.emptyList() : Arrays.asList(orders);
+    }
+
+    @Override
+    public List<OrderViewModel> getOrdersByUser(Long id) {
+        RestTemplate template = new RestTemplate();
+        OrderViewModel[] orders = template.getForObject(
+                backendServerUrl + "api/orders/user/" + id,
+                OrderViewModel[].class
+        );
+        return orders == null ? Collections.emptyList() : Arrays.asList(orders);
+    }
 }

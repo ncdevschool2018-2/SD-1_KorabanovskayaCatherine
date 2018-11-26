@@ -36,4 +36,14 @@ public class OrderDataController {
     public void deleteOrder(@PathVariable Long id) {
         orderDataService.deleteOrder(id);
     }
+
+    @GetMapping(value = "/billing-account/{id}")
+    public ResponseEntity<List<OrderViewModel>> getOrdersByBillingAccount(@PathVariable Long id) {
+        return ResponseEntity.ok(orderDataService.getOrdersByBillingAccount(id));
+    }
+
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<List<OrderViewModel>> getOrderByUser(@PathVariable Long id) {
+        return ResponseEntity.ok(orderDataService.getOrdersByUser(id));
+    }
 }

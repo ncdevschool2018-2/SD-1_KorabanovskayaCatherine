@@ -12,4 +12,6 @@ public interface BillingAccountDataService {
     BillingAccountViewModel saveBillingAccount(BillingAccountViewModel account);
 
     void deleteBillingAccount(Long id);
+
+    List<BillingAccountViewModel> getUserBillingAccounts(Long id);
 }

@@ -1,10 +1,13 @@
 package com.netcracker.edu.backend.entity;
 
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "subscription", schema = "eduproject")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "subId")
 public class Subscription {
 
     private Long subId;
@@ -13,27 +16,12 @@ public class Subscription {
     private Integer subMinAmountDays;
     private String subUrl;
     private String subInformation;
-    private Long ownerId;
+    private String subImage;
+    private Company company;
+    private Category category;
 
     public Subscription() {
 
-    }
-
-    public Subscription(String subName, Double subPrice, Integer subMinAmountDays, Long ownerId) {
-        this.subName = subName;
-        this.subPrice = subPrice;
-        this.subMinAmountDays = subMinAmountDays;
-        this.ownerId = ownerId;
-    }
-
-    public Subscription(String subName, Double subPrice, Integer subMinAmountDays,
-                        String subUrl, String subInformation, Long ownerId) {
-        this.subName = subName;
-        this.subPrice = subPrice;
-        this.subMinAmountDays = subMinAmountDays;
-        this.subUrl = subUrl;
-        this.subInformation = subInformation;
-        this.ownerId = ownerId;
     }
 
     @Id
@@ -92,44 +80,32 @@ public class Subscription {
         this.subInformation = subInformation;
     }
 
-    @Column(name = "owner_id", nullable = false)
-    public Long getOwnerId() {
-        return ownerId;
+    @Column(name = "sub_image", nullable = true, length = 60)
+    public String getSubImage() {
+        return subImage;
     }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
+    public void setSubImage(String subImage) {
+        this.subImage = subImage;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Subscription that = (Subscription) o;
-        return Objects.equals(subId, that.subId) &&
-                Objects.equals(subName, that.subName) &&
-                Objects.equals(subPrice, that.subPrice) &&
-                Objects.equals(subMinAmountDays, that.subMinAmountDays) &&
-                Objects.equals(subUrl, that.subUrl) &&
-                Objects.equals(subInformation, that.subInformation) &&
-                Objects.equals(ownerId, that.ownerId);
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
+    public Company getCompany() {
+        return company;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(subId, subName, subPrice, subMinAmountDays, subUrl, subInformation, ownerId);
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "Subscription{" +
-                "subId=" + subId +
-                ", subName='" + subName + '\'' +
-                ", subPrice=" + subPrice +
-                ", subMinAmountDays=" + subMinAmountDays +
-                ", subUrl='" + subUrl + '\'' +
-                ", subInformation='" + subInformation + '\'' +
-                ", ownerId=" + ownerId +
-                '}';
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

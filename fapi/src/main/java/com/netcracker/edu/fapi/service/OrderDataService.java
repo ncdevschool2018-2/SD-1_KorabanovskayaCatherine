@@ -12,4 +12,9 @@ public interface OrderDataService {
     OrderViewModel saveOrder(OrderViewModel order);
 
     void deleteOrder(Long id);
+
+    List<OrderViewModel> getOrdersByBillingAccount(Long id);
+
+    List<OrderViewModel> getOrdersByUser(Long id);
+
 }

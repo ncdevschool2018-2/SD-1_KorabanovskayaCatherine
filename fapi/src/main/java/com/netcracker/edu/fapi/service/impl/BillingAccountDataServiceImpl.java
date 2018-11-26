@@ -50,4 +50,14 @@ public class BillingAccountDataServiceImpl implements BillingAccountDataService 
                 backendServerUrl + "api/billing-accounts/" + id
         );
     }
+
+    @Override
+    public List<BillingAccountViewModel> getUserBillingAccounts(Long id) {
+        RestTemplate template = new RestTemplate();
+        BillingAccountViewModel[] billings = template.getForObject(
+          backendServerUrl + "api/billing-accounts/user/" + id,
+          BillingAccountViewModel[].class
+        );
+        return billings == null ? Collections.emptyList() : Arrays.asList(billings);
+    }
 }

@@ -45,4 +45,14 @@ public class SubscriptionDataServiceImpl implements SubscriptionDataService {
                 backendServerUrl + "/api/subscriptions/" + id
         );
     }
+
+    @Override
+    public List<SubscriptionViewModel> getUserSubscriptions(Long id) {
+        RestTemplate template = new RestTemplate();
+        SubscriptionViewModel[] subscriptions = template.getForObject(
+                backendServerUrl + "/api/subscriptions/user/" + id,
+                    SubscriptionViewModel[].class
+                );
+        return subscriptions == null ? Collections.emptyList() : Arrays.asList(subscriptions);
+    }
 }

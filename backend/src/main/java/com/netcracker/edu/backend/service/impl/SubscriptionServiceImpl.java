@@ -40,6 +40,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public Iterable<Subscription> getUserSubscriptions(Long ownerId) {
-        return repository.getSubscriptionByOwnerId(ownerId);
+        return repository.getSubscriptionByCompany_CompanyId(ownerId);
     }
 }

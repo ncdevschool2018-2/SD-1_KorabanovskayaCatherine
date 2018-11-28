@@ -1,11 +1,12 @@
 package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserViewModel {
 
-    private Long userId;
+//    private Long userId;
     private String login;
     private String password;
     private String role;
@@ -14,13 +15,13 @@ public class UserViewModel {
     public UserViewModel() {
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 
     public String getLogin() {
         return login;
@@ -53,4 +54,6 @@ public class UserViewModel {
 //    public void setAccount(AccountViewModel account) {
 //        this.account = account;
 //    }
+
+
 }

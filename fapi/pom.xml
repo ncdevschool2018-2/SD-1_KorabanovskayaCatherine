@@ -49,10 +49,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.springframework.security.oauth</groupId>-->
             <!--<artifactId>spring-security-oauth2</artifactId>-->
@@ -63,6 +63,11 @@
             <!--<artifactId>spring-security-jwt</artifactId>-->
             <!--<version>1.0.4.RELEASE</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
 
     </dependencies>
 
